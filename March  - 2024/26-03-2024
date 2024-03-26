@@ -1,0 +1,33 @@
+ 
+ Question : 
+ Given a string n, your task is to find whether it contains an additive sequence or not. A string n contains an additive sequence if its digits can make a sequence of numbers in which every number is addition of previous two numbers. You are required to complete the function which returns true if the string is a valid sequence else returns false. For better understanding check the examples.
+
+// Note: A valid string should contain at least three digit to make one additive sequence.
+ cpp code 
+
+  Class Solution {
+public:
+    bool solve(int ii, string &s, int n) {
+        if (ii >= n)
+            return true;
+
+        int a = 0, b = 0;
+        for (int i = ii; i < n; ++i) {
+            a = a * 10 + (s[i] - '0');
+            b = 0;
+            for (int j = i + 1; j < n; ++j) {
+                b = b * 10 + (s[j] - '0');
+                string c = to_string(a + b);
+                if (c.size() <= n - j - 1)
+                    if (c == s.substr(j + 1, c.size()))
+                        if (solve(j + c.size() + 1, s, n))
+                            return true;
+            }
+        }
+        return false;
+    }
+
+    bool isAdditiveSequence(string n) {
+        return solve(0, n, n.size());
+    }
+};
