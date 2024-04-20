@@ -10,7 +10,7 @@ class Solution {
         pathSum = pathSum * 10 + node.val;
         
         if (node.left == null && node.right == null)
-            return pathSum;s
+            return pathSum;
         
         return dfs(node.left, pathSum) + dfs(node.right, pathSum);
     }
