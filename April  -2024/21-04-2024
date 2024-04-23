@@ -17,6 +17,7 @@ class Solution {
         gr = new ArrayList<>(n);
         for (int i = 0; i < n; i++) {
             gr.add(new ArrayList<>());
+            
         }
 
         for (int[] edge : edges) {
