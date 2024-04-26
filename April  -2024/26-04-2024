@@ -1,0 +1,32 @@
+class Solution {
+    public int minFallingPathSum(int[][] grid) {
+        // Get the length of the grid (assuming it's a square grid)
+        int n = grid[0].length;
+        
+        // Iterate through each row of the grid starting from the second row (i.e., index 1)
+        for (int i = 1; i < n; i++) {
+            // Iterate through each column of the grid
+            for (int j = 0; j < n; j++) {
+                // Initialize a variable to store the minimum value found in the previous row, excluding the current column
+                int mn = Integer.MAX_VALUE;
+                
+                // Iterate through each column of the previous row
+                for (int k = 0; k < n; k++) {
+                    // Check if the current column (j) is not equal to the iterating column (k)
+                    if (j != k) {
+                        // Update the minimum value if the value in the previous row at column k is smaller
+                        mn = Math.min(mn, grid[i - 1][k]);
+                    }
+                }
+                // Add the minimum value found in the previous row to the current cell in the grid
+                grid[i][j] += mn;
+            }
+        }
+        
+        // Get the last row of the grid
+        int[] lastRow = grid[n - 1];
+        
+        // Find the minimum value in the last row and return it
+        return Arrays.stream(lastRow).min().getAsInt();
+    }
+}
